@@ -1,0 +1,6 @@
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Aaro/Desktop/385/NDS_Capture_V2/NDS_Capture_V2.ip_user_files/ipstatic/src/ClockGen.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'ClockGen'
+ERROR: [VRFC 10-2987] 'resetbridge' is not compiled in library 'xil_defaultlib' [C:/Users/Aaro/Desktop/385/NDS_Capture_V2/NDS_Capture_V2.ip_user_files/ipstatic/src/ClockGen.vhd:56]
+ERROR: [VRFC 10-2987] 'syncasync' is not compiled in library 'xil_defaultlib' [C:/Users/Aaro/Desktop/385/NDS_Capture_V2/NDS_Capture_V2.ip_user_files/ipstatic/src/ClockGen.vhd:64]
+ERROR: [VRFC 10-9458] unit 'behavioral' is ignored due to previous errors [C:/Users/Aaro/Desktop/385/NDS_Capture_V2/NDS_Capture_V2.ip_user_files/ipstatic/src/ClockGen.vhd:46]
+INFO: [VRFC 10-8704] VHDL file 'C:/Users/Aaro/Desktop/385/NDS_Capture_V2/NDS_Capture_V2.ip_user_files/ipstatic/src/ClockGen.vhd' is ignored due to errors

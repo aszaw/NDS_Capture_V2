@@ -70,7 +70,11 @@ proc create_report { reportName command } {
   }
 }
 OPTRACE "synth_1" START { ROLLUP_AUTO }
+set_param tcl.collectionResultDisplayLimit 0
 set_param checkpoint.writeSynthRtdsInDcp 1
+set_param chipscope.maxJobs 4
+set_param synth.incrementalSynthesisCache C:/Users/Aaro/AppData/Roaming/Xilinx/Vivado/.Xil/Vivado-17932-DESKTOP-0G38QBS/incrSyn
+set_param xicom.use_bs_reader 1
 set_msg_config -id {Synth 8-256} -limit 10000
 set_msg_config -id {Synth 8-638} -limit 10000
 set_msg_config  -id {Synth 8-448}  -string {{ERROR: [Synth 8-448] named port connection 'dclk' does not exist for instance 'nds' of module 'nds_bram_write' [c:/Users/Aaro/Desktop/385/NDS_Capture_385/7_1_guyanw2/lab7/lab7.gen/sources_1/bd/mb_block/ipshared/9b63/src/hdmi_text_controller_v1_0.sv:237]}}  -suppress 
@@ -84,26 +88,27 @@ set_param synth.vivado.isSynthRun true
 set_msg_config -source 4 -id {IP_Flow 19-2162} -severity warning -new_severity info
 set_property webtalk.parent_dir C:/Users/Aaro/Desktop/385/NDS_Capture_V2/NDS_Capture_V2.cache/wt [current_project]
 set_property parent.project_path C:/Users/Aaro/Desktop/385/NDS_Capture_V2/NDS_Capture_V2.xpr [current_project]
-set_property XPM_LIBRARIES XPM_CDC [current_project]
+set_property XPM_LIBRARIES {XPM_CDC XPM_MEMORY} [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
-set_property ip_repo_paths c:/Users/Aaro/Downloads/AX7020_2023.1-master/AX7020_2023.1-master/course_s1_fpga/13_hdmi_out/auto_create_project/my_ip [current_project]
+set_property ip_repo_paths c:/Users/Aaro/Desktop/385/NDS_Capture_V2/ip [current_project]
 update_ip_catalog
 set_property ip_output_repo c:/Users/Aaro/Desktop/385/NDS_Capture_V2/NDS_Capture_V2.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_verilog -library xil_defaultlib -sv {
-  C:/Users/Aaro/Desktop/385/NDS_Capture_V2/NDS_Capture_V2.srcs/sources_1/new/video_define.sv
-  C:/Users/Aaro/Desktop/385/NDS_Capture_V2/NDS_Capture_V2.srcs/sources_1/new/color_bar.sv
+  C:/Users/Aaro/Desktop/385/NDS_Capture_V2/NDS_Capture_V2.srcs/sources_1/new/nds_bram.sv
+  C:/Users/Aaro/Desktop/385/NDS_Capture_V2/NDS_Capture_V2.srcs/sources_1/new/pin_xor.sv
+  C:/Users/Aaro/Desktop/385/NDS_Capture_V2/NDS_Capture_V2.srcs/sources_1/new/vga_controller.sv
   C:/Users/Aaro/Desktop/385/NDS_Capture_V2/NDS_Capture_V2.srcs/sources_1/new/nds_capture_top.sv
 }
-read_ip -quiet c:/Users/Aaro/Desktop/385/NDS_Capture_V2/NDS_Capture_V2.srcs/sources_1/ip/rgb2dvi_0/rgb2dvi_0.xci
-set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_V2/NDS_Capture_V2.gen/sources_1/ip/rgb2dvi_0/src/rgb2dvi.xdc]
-set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_V2/NDS_Capture_V2.gen/sources_1/ip/rgb2dvi_0/src/rgb2dvi_ooc.xdc]
-set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_V2/NDS_Capture_V2.gen/sources_1/ip/rgb2dvi_0/src/rgb2dvi_clocks.xdc]
+read_ip -quiet C:/Users/Aaro/Desktop/385/NDS_Capture_V2/NDS_Capture_V2.srcs/sources_1/ip/hdmi_tx_0/hdmi_tx_0.xci
 
-read_ip -quiet c:/Users/Aaro/Desktop/385/NDS_Capture_V2/NDS_Capture_V2.srcs/sources_1/ip/clk_wiz_0_1/clk_wiz_0.xci
+read_ip -quiet C:/Users/Aaro/Desktop/385/NDS_Capture_V2/NDS_Capture_V2.srcs/sources_1/ip/blk_mem_gen_0/blk_mem_gen_0.xci
+set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_V2/NDS_Capture_V2.gen/sources_1/ip/blk_mem_gen_0/blk_mem_gen_0_ooc.xdc]
+
+read_ip -quiet C:/Users/Aaro/Desktop/385/NDS_Capture_V2/NDS_Capture_V2.srcs/sources_1/ip/clk_wiz_0_1/clk_wiz_0.xci
 set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_V2/NDS_Capture_V2.gen/sources_1/ip/clk_wiz_0_1/clk_wiz_0_board.xdc]
 set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_V2/NDS_Capture_V2.gen/sources_1/ip/clk_wiz_0_1/clk_wiz_0.xdc]
 set_property used_in_implementation false [get_files -all c:/Users/Aaro/Desktop/385/NDS_Capture_V2/NDS_Capture_V2.gen/sources_1/ip/clk_wiz_0_1/clk_wiz_0_ooc.xdc]
@@ -120,7 +125,11 @@ foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
 read_xdc C:/Users/Aaro/Desktop/385/NDS_Capture_V2/NDS_Capture_V2.srcs/constrs_1/new/nds_capture.xdc
 set_property used_in_implementation false [get_files C:/Users/Aaro/Desktop/385/NDS_Capture_V2/NDS_Capture_V2.srcs/constrs_1/new/nds_capture.xdc]
 
+read_xdc dont_touch.xdc
+set_property used_in_implementation false [get_files dont_touch.xdc]
 set_param ips.enableIPCacheLiteLoad 1
+
+read_checkpoint -auto_incremental -incremental C:/Users/Aaro/Desktop/385/NDS_Capture_V2/NDS_Capture_V2.srcs/utils_1/imports/synth_1/nds_capture_top.dcp
 close [open __synthesis_is_running__ w]
 
 OPTRACE "synth_design" START { }
